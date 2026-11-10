@@ -1,10 +1,10 @@
 ---
-name: project-memory
+name: hierarchical-memory
 description: Long-running project memory kept as a tree of small markdown files (phases → steps) in memory/. Use at session start to recover context, after a plan is approved to record a new phase, and whenever a decision, finding or change is worth remembering.
 
 ---
 
-# Project memory
+# Hierarchical memory
 
 Project memory lives in `memory/` as a tree of small markdown files.
 Read only what you need. Write one small file at a time.
