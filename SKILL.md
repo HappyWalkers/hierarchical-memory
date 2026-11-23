@@ -96,3 +96,7 @@ It's the one file you edit in place instead of superseding. Keep it true to the 
 ## Closing a phase
 
 Set `status: done` and `updated:`, rewrite `summary` as 1–3 sentences on the result, and point the **Current state** section of `memory/index.md` at the next phase.
+
+## Hooks
+
+The repository also ships two optional Claude Code hooks that make the agent follow this skill on every turn. `hooks/memory_pre.py` (UserPromptSubmit) reminds the agent to check the memory before it acts and lists the related notes. `hooks/memory_post.py` (Stop) asks it once to write to the memory before it hands back, if the turn did work and wrote nothing. Setup and settings are in `hooks/README.md`.
