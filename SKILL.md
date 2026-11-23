@@ -99,4 +99,9 @@ Set `status: done` and `updated:`, rewrite `summary` as 1–3 sentences on the r
 
 ## Hooks
 
-The repository also ships two optional Claude Code hooks that make the agent follow this skill on every turn. `hooks/memory_pre.py` (UserPromptSubmit) reminds the agent to check the memory before it acts and lists the related notes. `hooks/memory_post.py` (Stop) asks it once to write to the memory before it hands back, if the turn did work and wrote nothing. Setup and settings are in `hooks/README.md`.
+Two hooks make the agent follow this skill on every turn without being reminded. Set them up in your agent's hook system; in Claude Code that means a `UserPromptSubmit` hook and a `Stop` hook in `settings.json`.
+
+- **Before the prompt:** find the project's tree, the nearest `memory/` with an `index.md` walking up from the working directory. Add context telling the agent to read `memory/index.md` and the entries related to the prompt before it acts. Matching the prompt's keywords against each file's title and `summary` is enough to list candidates.
+- **Before handing back:** if the turn did work (it used tools) but changed no file in `memory/`, stop the agent once. Tell it to record the turn's decisions and results as described above, or to say in one line that nothing is worth recording. Let the second stop through (Claude Code passes `stop_hook_active`) so it cannot loop.
+
+Both hooks do nothing when there is no tree, and an error in either must never block the agent.
